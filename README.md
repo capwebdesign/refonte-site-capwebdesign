@@ -125,3 +125,100 @@ Effet Verre (Glassmorphism sur le Header) :
 Couleur de fond : #0f172a avec opacité à 85%.
 
 Flou d'arrière-plan (Backdrop-filter) : 12px.
+
+**8. Guide de Transposition : WordPress + Blocksy + Spectra**
+
+Cette section vous explique exactement où et comment intégrer la charte graphique dans vos outils pour reproduire fidèlement la maquette HTML.
+
+Étape 1 : Réglages Globaux dans Blocksy (Apparence > Personnaliser)
+
+Blocksy gère la "fondation" du site. En configurant cela en premier, Spectra héritera automatiquement de vos styles.
+
+**A. Couleurs (Global Colors) :**
+Remplissez la Palette de base (Global Palette) de Blocksy dans cet ordre :
+
+Couleur Primaire (Color 1) : #3b82f6 (Bleu Principal)
+
+Couleur Secondaire (Color 2) : #2563eb (Bleu Survol)
+
+Texte Initial (Text Color) : #94a3b8 (Texte Secondaire)
+
+Titres (Heading Color) : #f8fafc (Texte Principal)
+
+Bordures (Border Color) : #334155
+
+Fond du Site (Site Background) : #0f172a (Fond Principal)
+
+**B. Typographie (Typography) :**
+
+Police de base (Base Font) : Famille : Inter / Graisse : 400 / Taille de base : 16px.
+
+Titres (Headings) : Famille : Inter / Graisse : 700 (H2, H3). Laissez H1 à 800.
+
+**C. Boutons (Buttons) :**
+
+Type : Rempli (Filled).
+
+Couleur de fond : Palette Couleur 1 (Normale) / Couleur 2 (Survol).
+
+Rayon de bordure (Border Radius) : Lier les valeurs et mettre 100px ou 9999px pour l'effet "Pilule".
+
+Ombre portée (Box Shadow) : Activer l'ombre. Couleur : #3b82f6, Opacité : 30%, Décalage Y : 4px, Flou : 14px.
+
+**D. En-tête (Header) :**
+
+Ligne Principale (Main Row) : Dans l'onglet Design, définissez la couleur de fond sur #0f172a à 85% d'opacité.
+
+Effet Verre : Activez l'option "Effet de flou en arrière-plan" (Backdrop Filter) si disponible dans Blocksy Pro, sinon un CSS additionnel sera nécessaire (backdrop-filter: blur(12px);).
+
+Menu : Couleur du texte par défaut à #94a3b8, au survol à #f8fafc.
+
+Étape 2 : Réglages Globaux dans Spectra (Paramètres Spectra)
+
+Avant de construire vos pages, assurez-vous que Spectra s'aligne sur Blocksy.
+
+Héritage : Dans les réglages de Spectra, vérifiez que l'option "Hériter des couleurs et de la typographie du thème" est bien activée.
+
+Largeur du Conteneur : Définissez la largeur globale du conteneur (Global Container Width) sur 1200px (cela correspond au --container-max de la maquette).
+
+Étape 3 : Construction des Blocs avec Spectra
+
+Voici les correspondances pour recréer les blocs de la maquette :
+
+A. Les Sections (Fonds alternés) :
+
+Utilisez le bloc "Conteneur" (Container) de Spectra.
+
+Réglez-le sur "Pleine largeur" avec un conteneur interne "Encadré" (Boxed).
+
+Pour la couleur de fond (Onglet Style > Arrière-plan) : alternez entre vide (hérite du #0f172a de Blocksy) et #1e293b (Fond Secondaire) pour bien séparer les zones (ex: FAQ, Services).
+
+B. Les Cartes (Services, Maquettes, Avis) :
+
+Utilisez un bloc "Conteneur" enfant (ou le bloc "Boîte d'info" de Spectra).
+
+Fond : #1e293b ou #0f172a (selon la section mère).
+
+Bordure : Continue, 1px, couleur #334155. Au survol (Hover), passez la bordure à #3b82f6 (Bleu Principal).
+
+Rayon (Border Radius) : 16px.
+
+Ombre (Box Shadow) - Onglet Survol (Hover) : Décalage Y : 20px, Flou : 25px, Couleur #3b82f6 avec 10% d'opacité.
+
+C. Dégradé de texte (Le H1) :
+
+Sélectionnez votre titre principal dans Spectra (bloc Titre avancé).
+
+Dans l'onglet Style, au lieu d'une couleur unie, choisissez Dégradé.
+
+Angle : 90° (vers la droite). Couleur 1 : #60a5fa / Couleur 2 : #67e8f9.
+
+D. Les Icônes colorées (Bloc "Nos réalisations") :
+
+Dans un bloc "Boîte d'info" Spectra, utilisez les réglages de l'icône.
+
+Couleur de l'icône : ex. #60a5fa (Plomberie).
+
+Couleur de fond de l'icône : utilisez la même couleur mais baissez la jauge d'opacité (Alpha) à 0.10 (10%).
+
+Arrondi de l'icône : 12px.
