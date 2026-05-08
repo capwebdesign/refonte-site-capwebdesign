@@ -1,8 +1,8 @@
-## Nouvelle charte Graphique - CapWebDesign
+## Charte Graphique - CapWebDesign
 
 Ce document recense l'ensemble des éléments visuels du thème "Premium Dark" conçu pour CapWebDesign. Ces paramètres sont à intégrer dans les réglages globaux de votre constructeur de page (Blocksy/Spectra).
 
-**1. Typographie**
+1. Typographie
 
 Le site utilise une typographie unique, moderne et très lisible, idéale pour le web et les interfaces techniques.
 
@@ -22,7 +22,7 @@ Graisses (Weights) utilisées :
 
 800 (Extra-Bold) : Titre principal géant (H1), montants des prix.
 
-**2. Palette de Couleurs : La Marque (Bleus)**
+2. Palette de Couleurs : La Marque (Bleus)
 
 Ces couleurs constituent l'identité de CapWebDesign. Le bleu inspire la confiance, la technologie et le professionnalisme.
 
@@ -38,7 +38,7 @@ Bleu Sombre (Fonds de cartes Premium) : #1e3a8a (Variable: --brand-900)
 
 Cyan (Utilisé pour les dégradés éclatants) : #67e8f9 (Variable: --cyan-300)
 
-**3. Palette de Couleurs : Les Fonds (Mode Sombre / Slate)**
+3. Palette de Couleurs : Les Fonds (Mode Sombre / Slate)
 
 Une déclinaison de gris-bleutés (Ardoise) qui donne ce rendu "Premium" très doux pour les yeux, moins agressif qu'un noir pur.
 
@@ -50,7 +50,7 @@ Bordures et Séparateurs : #334155 (Variable: --dark-700)
 
 Bordures au survol : #475569 (Variable: --dark-600)
 
-**4. Palette de Couleurs : Les Textes**
+4. Palette de Couleurs : Les Textes
 
 Texte Principal (Titres, H1, H2, H3) : #f8fafc (Blanc très légèrement cassé)
 
@@ -60,7 +60,7 @@ Texte Tertiaire (Mentions légales, petits labels) : #64748b (Gris moyen)
 
 Texte Mis en avant (Highlight discret) : #cbd5e1
 
-**5. Couleurs d'Accentuation (Catégories / Métiers)**
+5. Couleurs d'Accentuation (Catégories / Métiers)
 
 Utilisées dans le bloc "Nos Réalisations" pour différencier visuellement les secteurs d'activité, toujours associées à un fond transparent à 10%.
 
@@ -72,7 +72,7 @@ Paysagiste (Vert) : #34d399 — Fond : rgba(52, 211, 153, 0.1)
 
 Couverture/Toiture (Rouge/Corail) : #f87171 — Fond : rgba(248, 113, 113, 0.1)
 
-**6. Dégradés (Gradients)**
+6. Dégradés (Gradients)
 
 Dégradé de Titre (H1 "artisans et indépendants") :
 
@@ -98,7 +98,7 @@ Couleur centrale : rgba(59, 130, 246, 0.15) (Bleu avec 15% d'opacité).
 
 Fondu vers : rgba(15, 23, 42, 0) (Transparent).
 
-**7. Effets UI (Bordures et Ombres)**
+7. Effets UI (Bordures et Ombres)
 
 Ces paramètres donnent de la profondeur et du "rebond" à votre maquette.
 
@@ -126,7 +126,7 @@ Couleur de fond : #0f172a avec opacité à 85%.
 
 Flou d'arrière-plan (Backdrop-filter) : 12px.
 
-**8. Guide de Transposition : WordPress + Blocksy + Spectra**
+8. Guide de Transposition : WordPress + Blocksy + Spectra
 
 Cette section vous explique exactement où et comment intégrer la charte graphique dans vos outils pour reproduire fidèlement la maquette HTML.
 
@@ -134,28 +134,32 @@ Cette section vous explique exactement où et comment intégrer la charte graphi
 
 Blocksy gère la "fondation" du site. En configurant cela en premier, Spectra héritera automatiquement de vos styles.
 
-**A. Couleurs (Global Colors) :**
-Remplissez la Palette de base (Global Palette) de Blocksy dans cet ordre :
+A. Couleurs (Global Colors) :
+Remplissez la Palette de base (Global Palette) de Blocksy qui comporte 8 emplacements (de gauche à droite) :
 
-Couleur Primaire (Color 1) : #3b82f6 (Bleu Principal)
+Couleur 1 (Primaire) : #3b82f6 (Bleu Principal - Utilisé pour les boutons et liens actifs)
 
-Couleur Secondaire (Color 2) : #2563eb (Bleu Survol)
+Couleur 2 (Survol) : #2563eb (Bleu Interaction - Utilisé pour le survol des boutons)
 
-Texte Initial (Text Color) : #94a3b8 (Texte Secondaire)
+Couleur 3 (Texte) : #94a3b8 (Texte Secondaire - Utilisé pour les paragraphes normaux)
 
-Titres (Heading Color) : #f8fafc (Texte Principal)
+Couleur 4 (Titres) : #f8fafc (Texte Principal - Utilisé pour les titres H1, H2, H3)
 
-Bordures (Border Color) : #334155
+Couleur 5 (Bordures) : #334155 (Lignes, séparateurs et bordures de cartes standard)
 
-Fond du Site (Site Background) : #0f172a (Fond Principal)
+Couleur 6 (Fond Site) : #0f172a (Fond Principal très sombre du site entier)
 
-**B. Typographie (Typography) :**
+Couleur 7 (Fond Cartes) : #1e293b (Fond Secondaire - Utilisé pour l'intérieur des cartes et de la FAQ)
+
+Couleur 8 (Détails) : #64748b (Texte Tertiaire - Utilisé pour les icônes inactives, mentions légales, petits labels)
+
+B. Typographie (Typography) :
 
 Police de base (Base Font) : Famille : Inter / Graisse : 400 / Taille de base : 16px.
 
 Titres (Headings) : Famille : Inter / Graisse : 700 (H2, H3). Laissez H1 à 800.
 
-**C. Boutons (Buttons) :**
+C. Boutons (Buttons) :
 
 Type : Rempli (Filled).
 
@@ -165,7 +169,7 @@ Rayon de bordure (Border Radius) : Lier les valeurs et mettre 100px ou 9999px po
 
 Ombre portée (Box Shadow) : Activer l'ombre. Couleur : #3b82f6, Opacité : 30%, Décalage Y : 4px, Flou : 14px.
 
-**D. En-tête (Header) :**
+D. En-tête (Header) :
 
 Ligne Principale (Main Row) : Dans l'onglet Design, définissez la couleur de fond sur #0f172a à 85% d'opacité.
 
