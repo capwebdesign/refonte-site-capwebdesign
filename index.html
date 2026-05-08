@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapWebDesign | Création de sites web premium pour artisans</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons (CDN léger pour les icônes) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            /* Couleurs de la marque */
+            --brand-50: #eff6ff;
+            --brand-100: #dbeafe;
+            --brand-400: #60a5fa;
+            --brand-500: #3b82f6;
+            --brand-600: #2563eb;
+            --brand-900: #1e3a8a;
+            --cyan-300: #67e8f9;
+
+            /* Nuances de fond sombre */
+            --dark-900: #0f172a;
+            --dark-800: #1e293b;
+            --dark-700: #334155;
+            --dark-600: #475569;
+
+            /* Textes */
+            --text-white: #f8fafc;
+            --text-slate-200: #e2e8f0;
+            --text-slate-300: #cbd5e1;
+            --text-slate-400: #94a3b8;
+            --text-slate-500: #64748b;
+
+            /* Espacements de base */
+            --container-max: 1200px;
+            --container-padding: 1.5rem;
+        }
+
+        /* Reset de base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-900);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utilitaires globaux */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .text-center { text-align: center; }
+        .relative { position: relative; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-600);
+            color: white;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-500);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--dark-800);
+            color: white;
+            border: 1px solid var(--dark-700);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--dark-700);
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--brand-400);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--brand-500);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .badge-dot::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            background-color: var(--brand-400);
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+            opacity: 0.75;
+        }
+
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* Titres de section */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            color: var(--brand-400);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--dark-700);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4.5rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .logo i { font-size: 1.875rem; color: var(--brand-500); }
+        .logo-text { color: white; }
+        .logo-highlight { color: var(--brand-500); }
+
+        .nav-desktop {
+            display: none;
+            gap: 2rem;
+        }
+
+        .nav-desktop a {
+            color: var(--text-slate-300);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-desktop a:hover {
+            color: white;
+        }
+
+        .header-cta { display: none; }
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--text-slate-300);
+            font-size: 1.875rem;
+            cursor: pointer;
+            display: block;
+        }
+
+        /* Menu Mobile Actif */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            width: 100%;
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-700);
+            border-radius: 1rem;
+            padding: 1rem;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a {
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            .nav-desktop { display: flex; }
+            .header-cta { display: flex; }
+            .menu-toggle { display: none; }
+            .mobile-menu { display: none !important; }
+        }
+
+        .hero {
+            background-color: var(--dark-900);
+            padding-top: 9.5rem;
+            padding-bottom: 5rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(15,23,42,0) 70%);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, var(--brand-400), var(--cyan-300));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .hero h2 {
+            font-size: 1.125rem;
+            font-weight: 400;
+            color: var(--text-slate-400);
+            max-width: 650px;
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero h2 { font-size: 1.25rem; }
+            .hero-actions { flex-direction: row; }
+        }
+        @media (min-width: 1024px) {
+            .hero h1 { font-size: 4rem; }
+        }
+
+        .services {
+            padding: 5rem 0;
+            background-color: var(--dark-800);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .card-service {
+            background-color: var(--dark-900);
+            border: 1px solid var(--dark-700);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-service:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+        }
+
+        .card-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 0.75rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--brand-400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.875rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-service:hover .card-icon {
+            background-color: var(--brand-500);
+            color: white;
+        }
+
+        .card-service h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .card-service p {
+            color: var(--text-slate-400);
+            font-size: 0.875rem;
+        }
+
+        /* --- NOUVELLE SECTION MAQUETTES --- */
+        .demos {
+            padding: 6rem 0;
+            background-color: var(--dark-900);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .demo-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .demo-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .demo-card {
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-700);
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .demo-card:hover {
+            border-color: var(--brand-500);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1);
+        }
+
+        .demo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.5rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--brand-400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Couleurs spécifiques par métier */
+        .icon-plombier { color: #60a5fa; background-color: rgba(96, 165, 250, 0.1); }
+        .icon-paysagiste { color: #34d399; background-color: rgba(52, 211, 153, 0.1); }
+        .icon-electricien { color: #fbbf24; background-color: rgba(251, 191, 36, 0.1); }
+        .icon-couvreur { color: #f87171; background-color: rgba(248, 113, 113, 0.1); }
+
+        .demo-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-desc {
+            color: var(--text-slate-400);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .demo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--brand-400);
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+            margin-top: auto;
+        }
+
+        .demo-link:hover { color: var(--brand-100); }
+        .demo-link i { transition: transform 0.3s; }
+        .demo-link:hover i { transform: translateX(4px); }
+        /* --- FIN SECTION MAQUETTES --- */
+
+        .pricing {
+            padding: 5rem 0;
+            background-color: var(--dark-800);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto 2rem auto;
+        }
+
+        @media (min-width: 1024px) {
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .pricing-card {
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-700);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .pricing-card.highlight {
+            background: linear-gradient(to bottom, var(--brand-900), var(--dark-800));
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+        }
+
+        @media (min-width: 1024px) {
+            .pricing-card.highlight { transform: translateY(-1rem); }
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--brand-500);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-header h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .pricing-header .subtitle { font-size: 0.875rem; font-weight: 400; color: var(--text-slate-400); }
+        .pricing-header .highlight-subtitle { color: var(--text-slate-300); }
+        
+        .pricing-promise {
+            color: var(--brand-400);
+            font-weight: 500;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .highlight .pricing-promise { color: var(--cyan-300); }
+
+        .price-display {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .price-display .amount { font-size: 2.25rem; font-weight: 800; }
+        .price-display .range { font-size: 1.25rem; font-weight: 600; color: var(--text-slate-400); }
+        .highlight .price-display .range { color: var(--text-slate-300); }
+
+        .pricing-desc {
+            color: var(--text-slate-400);
+            font-size: 0.875rem;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--dark-700);
+        }
+        .highlight .pricing-desc {
+            color: var(--text-slate-300);
+            border-bottom-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .pricing-features { flex-grow: 1; margin-bottom: 2rem; }
+        .pricing-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-slate-300);
+        }
+        .pricing-features i { font-size: 1.25rem; color: var(--brand-500); margin-top: 0.125rem; }
+        .highlight .pricing-features i { color: var(--brand-400); }
+        .pricing-features strong { color: white; }
+
+        .pricing-why {
+            background-color: var(--dark-900);
+            border: 1px solid var(--dark-700);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-slate-400);
+            margin-bottom: 2rem;
+        }
+        .highlight .pricing-why {
+            background-color: rgba(15, 23, 42, 0.5);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: var(--text-slate-300);
+        }
+
+        .btn-full { width: 100%; text-align: center; }
+
+        .maintenance-card {
+            background-color: var(--dark-900);
+            border: 1px solid var(--dark-700);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            transition: border-color 0.3s;
+        }
+
+        .maintenance-card:hover { border-color: var(--dark-600); }
+
+        .maintenance-content { flex: 1; }
+        .maintenance-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-700);
+            border-radius: 9999px;
+            color: var(--brand-400);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .maintenance-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .maintenance-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .maintenance-grid li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-slate-300);
+        }
+        .maintenance-grid i { color: var(--brand-500); font-weight: bold; }
+
+        .maintenance-price {
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-700);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .maintenance-card { flex-direction: row; align-items: center; padding: 2.5rem; }
+            .maintenance-price { min-width: 240px; }
+        }
+
+        .testimonials {
+            padding: 5rem 0;
+            background-color: var(--dark-900);
+        }
+
+        .review-card {
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-700);
+            border-radius: 1rem;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2.5rem;
+            color: var(--dark-700);
+        }
+
+        .stars { color: var(--brand-400); margin-bottom: 1rem; display: flex; gap: 0.25rem; }
+        .review-text { font-style: italic; color: var(--text-slate-300); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        
+        .client-info { display: flex; align-items: center; gap: 1rem; }
+        .client-avatar {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: var(--dark-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--text-slate-400);
+            font-size: 1.25rem;
+        }
+        .client-name { font-weight: 700; color: white; }
+        .client-job { font-size: 0.875rem; color: var(--brand-400); }
+
+        .faq {
+            padding: 5rem 0;
+            background-color: var(--dark-800);
+        }
+
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        
+        details {
+            background-color: var(--dark-900);
+            border: 1px solid var(--dark-700);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none; /* Cache la flèche native Firefox/IE */
+            transition: color 0.3s;
+        }
+        
+        summary::-webkit-details-marker { display: none; } /* Cache Safari/Chrome */
+        summary:hover { color: var(--brand-400); }
+        
+        .faq-icon { transition: transform 0.3s ease; font-size: 1.25rem; }
+        details[open] .faq-icon { transform: rotate(180deg); color: var(--brand-400); }
+        
+        .faq-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--text-slate-400);
+            font-size: 0.875rem;
+            line-height: 1.8;
+        }
+
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--dark-900);
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-blob {
+            position: absolute;
+            right: 0; bottom: 0;
+            width: 16rem; height: 16rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            filter: blur(60px);
+            transform: translate(50%, 50%);
+            pointer-events: none;
+        }
+
+        .contact-wrapper {
+            background-color: var(--dark-800);
+            border: 1px solid var(--dark-700);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            text-align: left;
+        }
+
+        @media (min-width: 1024px) {
+            .contact-grid { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-info-icon {
+            width: 3rem; height: 3rem;
+            border-radius: 0.75rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--brand-400);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info-content h4 {
+            color: white; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem;
+        }
+
+        .contact-info-content p {
+            color: var(--text-slate-400); font-size: 0.875rem;
+        }
+
+        .contact-info-content a {
+            color: var(--text-slate-400);
+            transition: color 0.3s;
+        }
+
+        .contact-info-content a:hover {
+            color: var(--brand-400);
+        }
+
+        /* Formulaires */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: var(--dark-900);
+            border: 1px solid var(--dark-700);
+            border-radius: 0.5rem;
+            padding: 0.875rem 1rem;
+            color: white;
+            font-family: inherit;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-slate-500);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--brand-500);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-consent {
+            font-size: 0.75rem;
+            color: var(--text-slate-500);
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        footer {
+            background-color: var(--dark-900);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--dark-700);
+        }
+
+        footer p { color: var(--text-slate-500); font-size: 0.875rem; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <i class="ph-fill ph-rocket-launch"></i>
+            <span class="logo-text">CapWeb<span class="logo-highlight">Design</span></span>
+        </a>
+        
+        <!-- Navigation Desktop -->
+        <nav class="nav-desktop">
+            <a href="#services">Nos Services</a>
+            <a href="#maquettes">Maquettes</a>
+            <a href="#tarifs">Nos Tarifs</a>
+            <a href="#temoignages">Témoignages</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        
+        <!-- Bouton CTA Header -->
+        <div class="header-cta">
+            <a href="#contact" class="btn btn-primary">
+                <i class="ph ph-phone"></i>
+                Demander un devis
+            </a>
+        </div>
+
+        <!-- Bouton Menu Mobile -->
+        <button class="menu-toggle" id="mobile-menu-btn" aria-label="Ouvrir le menu">
+            <i class="ph ph-list"></i>
+        </button>
+    </div>
+
+    <!-- Navigation Mobile -->
+    <nav class="mobile-menu" id="mobile-menu">
+        <a href="#services" class="mobile-link">Nos Services</a>
+        <a href="#maquettes" class="mobile-link">Maquettes</a>
+        <a href="#tarifs" class="mobile-link">Nos Tarifs</a>
+        <a href="#temoignages" class="mobile-link">Témoignages</a>
+        <a href="#contact" class="mobile-link" style="color: var(--brand-400);">Contact</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="container">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Spécialiste de l'artisanat local
+            </div>
+            
+            <h1>Création de sites web premium pour <span>artisans et indépendants</span></h1>
+            
+            <h2>Transformez vos visiteurs en clients réguliers. Une machine sur-mesure conçue pour faire sonner votre téléphone et multiplier vos demandes de devis.</h2>
+            
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary btn-large">
+                    Obtenir un devis gratuit
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+                <a href="#services" class="btn btn-secondary btn-large">
+                    Découvrir nos solutions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Notre Expertise</span>
+                <h2 class="section-title">Le moteur de votre croissance</h2>
+            </div>
+
+            <div class="grid-3">
+                <!-- Carte Création Web -->
+                <article class="card-service">
+                    <div class="card-icon"><i class="ph ph-devices"></i></div>
+                    <h3>Création de sites web haute performance</h3>
+                    <p>Fini les sites lents qui font fuir vos visiteurs. Nous concevons des sites sur-mesure, ultra-rapides et 100 % adaptés aux smartphones. Plus qu'une simple vitrine, votre site est pensé pour faciliter la navigation de vos futurs clients et les inciter à vous contacter directement.</p>
+                </article>
+
+                <!-- Carte Design -->
+                <article class="card-service">
+                    <div class="card-icon"><i class="ph ph-shield-check"></i></div>
+                    <h3>Identité visuelle & Design professionnel</h3>
+                    <p>Vos clients vous confient leurs projets : votre image en ligne doit inspirer confiance. Nous créons un design qui reflète le sérieux de votre savoir-faire. Fini les sites qui font "amateur". Avec des couleurs adaptées et la mise en valeur de vos réalisations, vous vous démarquez instantanément.</p>
+                </article>
+
+                <!-- Carte SEO -->
+                <article class="card-service">
+                    <div class="card-icon"><i class="ph ph-map-pin-line"></i></div>
+                    <h3>Visibilité & SEO Local</h3>
+                    <p>Soyez le premier artisan trouvé par ceux qui vous cherchent près de chez vous. Nous optimisons la structure de votre site pour que vous remontiez sur Google sur votre ville. L'objectif : capter les clients de votre secteur au moment précis où ils ont besoin de vous.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOUVELLE SECTION MAQUETTES -->
+    <section id="maquettes" class="demos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Nos Réalisations</span>
+                <h2 class="section-title">Exemples de maquettes disponibles</h2>
+                <p style="color: var(--text-slate-400); max-width: 600px; margin: 1rem auto 0;">Visualisez le rendu pro adapté à chaque métier de l'artisanat.</p>
+            </div>
+
+            <div class="demo-grid">
+                <!-- Carte 1 -->
+                <article class="demo-card">
+                    <div class="demo-icon icon-plombier"><i class="ph-fill ph-drop"></i></div>
+                    <h3 class="demo-title">Plombier AquaPro</h3>
+                    <p class="demo-desc">Landing page d'un site de dépannage plomberie et appels rapides.</p>
+                    <a href="#contact" class="demo-link">Voir la démo <i class="ph ph-arrow-right"></i></a>
+                </article>
+
+                <!-- Carte 2 -->
+                <article class="demo-card">
+                    <div class="demo-icon icon-paysagiste"><i class="ph-fill ph-tree"></i></div>
+                    <h3 class="demo-title">Paysagiste Dream Green</h3>
+                    <p class="demo-desc">Landing page d'un site d'artisan paysagiste.</p>
+                    <a href="#contact" class="demo-link">Voir la démo <i class="ph ph-arrow-right"></i></a>
+                </article>
+
+                <!-- Carte 3 -->
+                <article class="demo-card">
+                    <div class="demo-icon icon-plombier"><i class="ph-fill ph-drop"></i></div>
+                    <h3 class="demo-title">MG Plomberie</h3>
+                    <p class="demo-desc">Maquette premium pour MG Plomberie.</p>
+                    <a href="#contact" class="demo-link">Voir la démo <i class="ph ph-arrow-right"></i></a>
+                </article>
+
+                <!-- Carte 4 -->
+                <article class="demo-card">
+                    <div class="demo-icon icon-plombier"><i class="ph-fill ph-drop"></i></div>
+                    <h3 class="demo-title">Site plombier générique #1</h3>
+                    <p class="demo-desc">Exemple de landing page plombier personnalisable.</p>
+                    <a href="#contact" class="demo-link">Voir la démo <i class="ph ph-arrow-right"></i></a>
+                </article>
+
+                <!-- Carte 5 -->
+                <article class="demo-card">
+                    <div class="demo-icon icon-electricien"><i class="ph-fill ph-lightning"></i></div>
+                    <h3 class="demo-title">Site électricien Electro Services</h3>
+                    <p class="demo-desc">Site local pour dépannage électrique, mise aux normes et contact rapide.</p>
+                    <a href="#contact" class="demo-link">Voir la démo <i class="ph ph-arrow-right"></i></a>
+                </article>
+
+                <!-- Carte 6 -->
+                <article class="demo-card">
+                    <div class="demo-icon icon-electricien"><i class="ph-fill ph-lightning"></i></div>
+                    <h3 class="demo-title">Electroconfort en Occitanie</h3>
+                    <p class="demo-desc">Un site démo, en mode sombre, pour électricien.</p>
+                    <a href="#contact" class="demo-link">Voir la démo <i class="ph ph-arrow-right"></i></a>
+                </article>
+
+                <!-- Carte 7 -->
+                <article class="demo-card">
+                    <div class="demo-icon icon-couvreur"><i class="ph-fill ph-house-line"></i></div>
+                    <h3 class="demo-title">LeBonToit</h3>
+                    <p class="demo-desc">Un site démo pour artisan couvreur.</p>
+                    <a href="#contact" class="demo-link">Voir la démo <i class="ph ph-arrow-right"></i></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="tarifs" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Investissement</span>
+            <p style="color: var(--text-slate-400); max-width: 600px; margin: 1rem auto 0;">Des tarifs transparents, pensés pour rentabiliser votre investissement dès les premiers chantiers obtenus.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Carte 1 : One Page -->
+            <article class="pricing-card">
+                <div class="pricing-header">
+                    <h3>L'Essentiel <span class="subtitle">(Site One-Page)</span></h3>
+                    <p class="pricing-promise">Le propulseur de votre business local.</p>
+                    <div class="price-display">
+                        <span class="amount">600€</span>
+                        <span class="range">à 1 200€ HT</span>
+                    </div>
+                    <p class="pricing-desc">L'idéal pour poser les fondations de votre présence en ligne, rassurer vos futurs clients et générer vos premiers appels immédiatement.</p>
+                </div>
+
+                <ul class="pricing-features">
+                    <li><i class="ph-fill ph-check-circle"></i> <span><strong>Machine à contacts :</strong> Boutons d'appel direct et formulaire de devis.</span></li>
+                    <li><i class="ph-fill ph-check-circle"></i> <span><strong>100% Mobile :</strong> Affichage instantané sur smartphone en cas d'urgence.</span></li>
+                    <li><i class="ph-fill ph-check-circle"></i> <span><strong>Confiance immédiate :</strong> Mise en valeur de vos avis et de votre expertise.</span></li>
+                </ul>
+
+                <div class="pricing-why">
+                    <strong>Pourquoi cette fourchette ?</strong><br>
+                    À 600€, vous fournissez textes et photos. À 1 200€, nous rédigeons vos arguments commerciaux et optimisons vos visuels (Clé en main).
+                </div>
+
+                <a href="#contact" class="btn btn-secondary btn-full">Me renseigner</a>
+            </article>
+
+            <!-- Carte 2 : Site Complet -->
+            <article class="pricing-card highlight">
+                <div class="badge-popular">Stratégie Gagnante</div>
+                <div class="pricing-header">
+                    <h3>L'Acquisition <span class="subtitle highlight-subtitle">(Site Complet + Blog)</span></h3>
+                    <p class="pricing-promise">L'accélérateur de croissance locale.</p>
+                    <div class="price-display">
+                        <span class="amount">1 500€</span>
+                        <span class="range">à 3 500€ HT</span>
+                    </div>
+                    <p class="pricing-desc">Une machine d'acquisition pérenne pour dominer votre marché, multiplier les appels et recevoir des demandes de devis qualifiées en continu.</p>
+                </div>
+
+                <ul class="pricing-features">
+                    <li><i class="ph-fill ph-check-circle"></i> <span><strong>Conversion Maximale :</strong> Entonnoir de vente optimisé pour le contact.</span></li>
+                    <li><i class="ph-fill ph-check-circle"></i> <span><strong>SEO Local puissant :</strong> Architecture conçue pour la 1ère page Google.</span></li>
+                    <li><i class="ph-fill ph-check-circle"></i> <span><strong>Page par service :</strong> Capter la demande précise avec des formulaires adaptés.</span></li>
+                    <li><i class="ph-fill ph-check-circle"></i> <span><strong>Portfolio dynamique :</strong> Preuve par l'image de vos chantiers (Avant/Après).</span></li>
+                </ul>
+
+                <div class="pricing-why">
+                    <strong>Pourquoi cette fourchette ?</strong><br>
+                    De 5 pages essentielles (1 500€) à une stratégie de domination complète (15 pages, rédaction SEO par ville, devis à étapes complexes).
+                </div>
+
+                <a href="#contact" class="btn btn-primary btn-full">Démarrer mon projet</a>
+            </article>
+        </div>
+
+        <article class="maintenance-card">
+            <div class="maintenance-content">
+                <div class="maintenance-tag">
+                    <i class="ph-fill ph-shield-check"></i> Incontournable
+                </div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">L'Assurance Tranquillité <span style="font-size: 1rem; font-weight: 400; color: var(--text-slate-400);">(Hébergement & Maintenance)</span></h3>
+                <p style="color: var(--text-slate-400); font-size: 0.875rem;">Un site web professionnel est comme votre véhicule utilitaire : pour rester performant et à l'abri des piratages, il a besoin d'un entretien régulier. Déléguez-nous toute la partie technique.</p>
+                
+                <ul class="maintenance-grid">
+                    <li><i class="ph-bold ph-check"></i> Hébergement ultra-rapide</li>
+                    <li><i class="ph-bold ph-check"></i> Mises à jour de sécurité</li>
+                    <li><i class="ph-bold ph-check"></i> Sauvegardes hebdomadaires</li>
+                    <li><i class="ph-bold ph-check"></i> Renouvellement du nom de domaine</li>
+                </ul>
+            </div>
+            
+            <div class="maintenance-price">
+                <span style="font-size: 0.875rem; color: var(--text-slate-400); font-weight: 500;">À partir de</span>
+                <div style="margin: 0.25rem 0;">
+                    <span style="font-size: 2.25rem; font-weight: 800;">30€</span>
+                    <span style="color: var(--text-slate-400); font-weight: 500;">HT / mois</span>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-slate-500); margin-bottom: 1.5rem;">Sans engagement de durée</span>
+                
+                <a href="#contact" class="btn btn-secondary btn-full">Voir les détails</a>
+            </div>
+        </article>
+        </div>
+    </section>
+
+    <section id="temoignages" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Ils ont franchi le pas</span>
+                <h2 class="section-title">Des artisans qui font tourner leur entreprise</h2>
+            </div>
+
+            <div class="grid-3">
+                <article class="review-card">
+                    <i class="ph-fill ph-quotes quote-icon"></i>
+                    <div class="stars">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="review-text">"Depuis la mise en ligne du site, mon téléphone sonne 3 fois plus pour des urgences de plomberie. Le bouton d'appel direct sur mobile qu'ils ont installé, c'est redoutable d'efficacité."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">J</div>
+                        <div>
+                            <div class="client-name">Julien M.</div>
+                            <div class="client-job">Plombier-Chauffagiste</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <i class="ph-fill ph-quotes quote-icon"></i>
+                    <div class="stars">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="review-text">"Je perdais de beaux chantiers car je n'avais rien pour montrer mon travail. Aujourd'hui, mon portfolio en ligne rassure mes clients instantanément et m'aide à signer de plus gros devis."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">M</div>
+                        <div>
+                            <div class="client-name">Marc T.</div>
+                            <div class="client-job">Électricien Domotique</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <i class="ph-fill ph-quotes quote-icon"></i>
+                    <div class="stars">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="review-text">"Un service vraiment clé en main. Je n'y connais rien en informatique, et je passe mes journées sur les chantiers. CapWebDesign s'est occupé de tout, même de rédiger mes textes de présentation."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">S</div>
+                        <div>
+                            <div class="client-name">Sophie L.</div>
+                            <div class="client-job">Rénovation d'intérieur</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container faq-container">
+            <div class="section-header" style="margin-bottom: 3rem;">
+                <h2 class="section-title">Questions Fréquentes</h2>
+                <p style="color: var(--text-slate-400); margin-top: 1rem;">Vous avez un doute ? Voici les réponses aux questions que les artisans nous posent le plus souvent.</p>
+            </div>
+
+            <details>
+                <summary>
+                    Je n'ai pas le temps de m'occuper d'un site internet, comment fait-on ?
+                    <i class="ph ph-caret-down faq-icon"></i>
+                </summary>
+                <div class="faq-content">C'est justement pour cela que nos offres sont pensées. Vous nous consacrez un seul appel de 30 à 45 minutes pour nous parler de votre métier, et nous nous occupons de tout le reste (création, design, rédaction, mise en ligne). Vous restez concentré sur vos chantiers.</div>
+            </details>
+
+            <details>
+                <summary>
+                    En combien de temps mon site sera-t-il prêt et en ligne ?
+                    <i class="ph ph-caret-down faq-icon"></i>
+                </summary>
+                <div class="faq-content">Pour un site "Essentiel" (One-Page), comptez généralement 2 à 3 semaines à partir du moment où nous validons le projet. Pour un site "Acquisition" (complet), le délai est d'environ 4 à 6 semaines, le temps de rédiger les textes optimisés et de structurer le référencement.</div>
+            </details>
+
+            <details>
+                <summary>
+                    Dois-je rédiger les textes moi-même ?
+                    <i class="ph ph-caret-down faq-icon"></i>
+                </summary>
+                <div class="faq-content">Si vous choisissez nos offres "Clé en main", non. Nous nous chargeons de la rédaction de vos arguments commerciaux pour qu'ils soient persuasifs et optimisés pour Google. Si vous avez déjà des textes, nous pouvons simplement les réviser et les intégrer.</div>
+            </details>
+
+            <details>
+                <summary>
+                    Serais-je vraiment visible sur Google dans ma ville ?
+                    <i class="ph ph-caret-down faq-icon"></i>
+                </summary>
+                <div class="faq-content">Oui, l'optimisation locale est au cœur de notre stratégie. Nos sites sont techniquement structurés pour plaire aux moteurs de recherche locaux. Cependant, le référencement naturel (SEO) est un travail de fond : les premiers résultats concrets apparaissent généralement après 3 à 6 mois.</div>
+            </details>
+
+            <details>
+                <summary>
+                    Le site m'appartient-il une fois terminé ?
+                    <i class="ph ph-caret-down faq-icon"></i>
+                </summary>
+                <div class="faq-content">Absolument. Le site vous appartient à 100 % une fois réglé. Vous n'êtes pas "locataire" de votre site, contrairement à certaines agences. L'abonnement mensuel (à partir de 30€) ne couvre que les frais techniques incompressibles : l'hébergement du serveur, le nom de domaine et la maintenance de sécurité pour éviter les piratages.</div>
+            </details>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-blob"></div>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div class="contact-wrapper">
+                <div class="contact-grid">
+                    <!-- Colonne Info -->
+                    <div>
+                        <span class="section-subtitle" style="text-align: left;">Contact</span>
+                        <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; text-align: left;">Prêt à faire décoller votre activité ?</h2>
+                        <p style="color: var(--text-slate-400); font-size: 1rem; text-align: left;">Décrivez votre projet ou votre besoin, nous revenons vers vous rapidement avec une proposition claire et un appel stratégique offert.</p>
+                        
+                        <div class="contact-info-list">
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon"><i class="ph-fill ph-phone"></i></div>
+                                <div class="contact-info-content">
+                                    <h4>Téléphone</h4>
+                                    <p><a href="tel:+33619681939">06 19 68 19 39</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon"><i class="ph-fill ph-envelope-simple"></i></div>
+                                <div class="contact-info-content">
+                                    <h4>Email</h4>
+                                    <p><a href="mailto:contact@capwebdesign.fr">contact@capwebdesign.fr</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon"><i class="ph-fill ph-clock"></i></div>
+                                <div class="contact-info-content">
+                                    <h4>Horaires</h4>
+                                    <p>Lun – Ven : 9h – 18h</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon"><i class="ph-fill ph-map-pin"></i></div>
+                                <div class="contact-info-content">
+                                    <h4>Zone d'intervention</h4>
+                                    <p>Montpellier & Occitanie (et France entière à distance)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Colonne Formulaire -->
+                    <div>
+                        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Le formulaire est prêt à être connecté sur WordPress !');">
+                            <div class="form-group">
+                                <label class="form-label" for="nom">Nom</label>
+                                <input type="text" id="nom" class="form-control" placeholder="Votre nom complet" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="tel">Téléphone</label>
+                                <input type="tel" id="tel" class="form-control" placeholder="Votre numéro" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="votre@email.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="message">Message</label>
+                                <textarea id="message" class="form-control" placeholder="Décrivez votre projet..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full" style="width: 100%;">Envoyer ma demande</button>
+                            
+                            <p class="form-consent">En envoyant ce formulaire, vous acceptez d'être recontacté par CapWebDesign.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <a href="#" class="logo" style="justify-content: center; opacity: 0.5; margin-bottom: 1rem; transition: opacity 0.3s;">
+            <i class="ph-fill ph-rocket-launch"></i>
+            <span class="logo-text">CapWeb<span class="logo-highlight">Design</span></span>
+        </a>
+        <p>© 2026 CapWebDesign. Créateur de croissance pour artisans. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<script>
+    // Script très simple pour gérer l'ouverture/fermeture du menu sur mobile
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    const icon = menuBtn.querySelector('i');
+
+    function toggleMenu() {
+        mobileMenu.classList.toggle('active');
+        if (mobileMenu.classList.contains('active')) {
+            icon.classList.replace('ph-list', 'ph-x');
+        } else {
+            icon.classList.replace('ph-x', 'ph-list');
+        }
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+
+    // Fermer le menu si on clique sur un lien (pour un site One-Page)
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
